@@ -111,8 +111,8 @@ app.delete('/recipes/:id', (req, res) => {
   res.status(204).end();
 });
 
-app.put('recipes/:id', jsonParser, (req,res) => {
-  const requiredFields = ['name', 'budget', 'id'];
+app.put('/recipes/:id', jsonParser, (req,res) => {
+  const requiredFields = ['name', 'ingredients', 'id'];
   for(i=0;i<requiredFields.length;i++){
     const field = requiredFields[i];
     if(!(field in req.body)){
@@ -126,9 +126,9 @@ app.put('recipes/:id', jsonParser, (req,res) => {
       return res.status(400).send(message);
     }
     Recipes.update({
-        "name": req.params.id,
-        "budget": req.body.name,
-        "id": req.body.id
+        "id": req.params.id,
+        "ingredients": req.body.ingredients,
+        "name": req.body.name
       });
     res.status(204).end();
   }
